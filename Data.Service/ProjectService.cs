@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace Data.Service//TODO: add more attr
+namespace Data.Service
 {
     public class ProjectService : IProjectService
     {
@@ -28,7 +28,7 @@ namespace Data.Service//TODO: add more attr
             project.UserId = userName.Id;
 
             dbContext.Projects.Add(project);
-            dbContext.SaveChanges();//////////////////////////////////////////////////////////////////////////////////////
+            dbContext.SaveChanges();
             return project.Id;
         }
 
@@ -45,8 +45,7 @@ namespace Data.Service//TODO: add more attr
             var userName = dbContext.AspNetUsers.Where(a => a.UserName == UserName).ToList()[0];
             commentary.UserId = userName.Id;
 
-            //commentary.UserId = 
-            //commentary.aspNetUser = 
+
 
             var entity = dbContext.Projects.Find(Id);
             commentary.Project = entity;
@@ -84,7 +83,6 @@ namespace Data.Service//TODO: add more attr
         public IEnumerable<Commentary> GetCommentaries(int ProjectID)//
         {
             var commentaries = dbContext.Commentaries.Where(a => a.ProjectId == ProjectID).ToList();
-            //var commentariesViewModel = CommentaryToViewModel(commentaries);
 
             return commentaries;
         }
@@ -95,22 +93,6 @@ namespace Data.Service//TODO: add more attr
 
             return content[0];            
         }
-
-        //public IEnumerable<CommentaryViewModel> CommentaryToViewModel(IEnumerable<Commentary> commentaries)
-        //{
-        //    var commentaryViewModel = new List<CommentaryViewModel>();
-
-        //    foreach(var commentary in commentaries)
-        //    {
-        //        commentaryViewModel.Add(new CommentaryViewModel
-        //        {
-        //            Id = commentary.Id,
-        //            Text = commentary.Text,
-        //            ProjectId = commentary.ProjectId,
-        //        });
-        //    }
-        //    return commentaryViewModel;
-        //}
 
         public void Delete(int Id)
         {

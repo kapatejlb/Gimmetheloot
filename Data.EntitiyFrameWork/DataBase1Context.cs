@@ -139,13 +139,6 @@ namespace Data.EntitiyFrameWork
                     .WithOne(p => p.aspNetUser)
                     .HasForeignKey(d => d.UserId);
 
-                //entity
-                //    .HasMany(d => d)
-                //    .WithOne(p => p.aspNetUser)
-                //    .HasForeignKey(d => d.UserId);
-
-                //entity.
-
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Email).HasMaxLength(256);
@@ -160,12 +153,12 @@ namespace Data.EntitiyFrameWork
             modelBuilder.Entity<Project>(entity =>
             {
                 entity
-                .HasOne(d => d.Content)//one project have one content
+                .HasOne(d => d.Content)
                 .WithOne(p => p.Project)
                 .HasForeignKey<Content>(d => d.ProjectId);
 
                 entity
-                .HasMany(d => d.Comments)//one project have many comments
+                .HasMany(d => d.Comments)
                 .WithOne(p => p.Project)
                 .HasForeignKey(d => d.ProjectId);
 

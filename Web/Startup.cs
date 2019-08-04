@@ -54,10 +54,6 @@ namespace Web
             services.AddScoped<IProjectService, ProjectService>();
 
             services.AddSignalR();
-
-            //services.AddMvc().AddRazorOptions(options => options.AllowRecompilingViewsOnFileChange = true);
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
