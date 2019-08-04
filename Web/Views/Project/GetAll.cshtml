@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Data.ViewModels.ViewModels.ProjectViewModel>
+
+<p><a asp-action="Create">Add</a></p>
+
+@foreach (var proj in Model)
+{
+    <p>@proj.Id</p>
+    <p>@proj.Title</p>
+    <p>@proj.Subject</p>
+    <p>@proj.Created</p>
+    <p>@proj.ExpirationDate</p>
+    <a asp-action="Delete" asp-route-id="@proj.Id">Delete</a>
+    <a asp-action="Edit" asp-route-id="@proj.Id">Update</a>
+    <a asp-action="Details" asp-route-id="@proj.Id">Details</a>
+
+    <hr />
+    
+}

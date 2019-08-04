@@ -1,0 +1,71 @@
+﻿@*@model Data.ViewModels.ViewModels.BigViewModel*@
+@*@model  IEnumerable<Data.ViewModels.ViewModels.BigViewModel>*@
+
+@*@model Tuple<Data.ViewModels.ViewModels.ProjectViewModel, Data.ViewModels.ViewModels.CommentaryViewModel>*@
+
+@using Data.Entities;
+
+@model Data.ViewModels.ViewModels.ProjectViewModel
+
+<div class="row">
+    <div class="col-md-12">
+        @*<form method="post" action="~/Project/Details">*@
+
+        @*<h1 name="idofproj" >@Model.Id</h1>*@
+
+        <label><input value="@Model.Id" name="idofproj" hidden=""></label>
+
+        <h1>@Model.Title</h1>
+
+        <h3>@Model.Subject</h3>
+
+        <p></p>
+        <h3>@Model.Content.Text</h3>
+        <h4>@Model.Content.Date</h4>
+        <p></p>
+
+
+        <big>Created: @Model.Created</big>
+        <p>
+            <big>Expiration Date: @Model.ExpirationDate</big>
+        </p>
+
+        <input hidden value="@User.Identity.Name" type="text" id="userInput" />
+
+        <input hidden value="@DateTime.Now" type="text" id="datainput" />
+
+        <input hidden value="@Model.Id" type="text" id="projectid" />
+
+        <p><h3>Enter ur opinion:</h3></p>
+        <p><textarea style="width: 1000px; height: 300px;" name="NewCommentary" id="messageInput"></textarea></p>
+
+        @*<p> <input id="messageInput" type="text" /></p>*@
+
+        @*<button value="Leave a comment" id="sendButton" class="btn btn-primary" />*@
+
+        <div class="form-group">
+            <input type="submit" value="Leave a comment" class="btn btn-primary" id="sendButton" />
+        </div>
+
+        @*</form>*@
+    </div>
+</div>
+
+<input hidden name="UserName" value="@User.Identity.Name"></input>
+
+<div id="messagesList"></div>
+
+
+@foreach (var commentary in Model.Comments)
+{
+    <h3>@commentary.UserName</h3>
+    <h4>@commentary.Text</h4>
+    <h3>@commentary.Date</h3>
+
+    <hr />
+}
+
+
+
+
+
