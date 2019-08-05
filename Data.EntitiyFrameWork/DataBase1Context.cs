@@ -11,12 +11,10 @@ namespace Data.EntitiyFrameWork
         public DataBase1Context()
         {
         }
-
         public DataBase1Context(DbContextOptions<DataBase1Context> options)
             : base(options)
         {
         }
-
         public virtual DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
@@ -27,7 +25,6 @@ namespace Data.EntitiyFrameWork
         public virtual DbSet<Commentary> Commentaries { get; set; }
         public virtual DbSet<Content> Contents { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
-
         public virtual DbSet<Post> Posts { get; set; }
 
 
@@ -138,6 +135,11 @@ namespace Data.EntitiyFrameWork
                     .HasMany(d => d.Commentaries)
                     .WithOne(p => p.aspNetUser)
                     .HasForeignKey(d => d.UserId);
+
+                entity
+                    .HasMany(d => d.Posts)
+                    .WithOne(p => p.AspNetUsers)
+                    .HasForeignKey(d => d.AspNetUserId);
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 

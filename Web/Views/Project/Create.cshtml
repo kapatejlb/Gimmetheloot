@@ -13,9 +13,6 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-
-            @*<input asp-for="Id" hidden="" class="form-control" />*@
-
             <div class="form-group" style="width: 500px;">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
@@ -51,9 +48,7 @@
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
 
-            <input hidden name ="UserName" value="@User.Identity.Name" ></input>
-
-
+            <input hidden name ="UserName" value="@User.Identity.Name" />
 
         </form>
     </div>

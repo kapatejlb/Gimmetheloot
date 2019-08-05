@@ -231,6 +231,8 @@ namespace Data.EntitiyFrameWork.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AspNetUserId");
+
                     b.Property<DateTime>("Date");
 
                     b.Property<int>("ProjectId");
@@ -238,6 +240,8 @@ namespace Data.EntitiyFrameWork.Migrations
                     b.Property<string>("Text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AspNetUserId");
 
                     b.HasIndex("ProjectId");
 
@@ -336,6 +340,10 @@ namespace Data.EntitiyFrameWork.Migrations
 
             modelBuilder.Entity("Data.Entities.Entities.Post", b =>
                 {
+                    b.HasOne("Data.Entities.AspNetUsers", "AspNetUsers")
+                        .WithMany("Posts")
+                        .HasForeignKey("AspNetUserId");
+
                     b.HasOne("Data.Entities.Project", "Project")
                         .WithMany("Posts")
                         .HasForeignKey("ProjectId")

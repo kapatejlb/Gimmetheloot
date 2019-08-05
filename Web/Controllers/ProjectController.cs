@@ -51,8 +51,6 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Details(int idofproj, string NewCommentary, string UserName)
         {
-            
-
             projectService.AddCommentary(idofproj, NewCommentary, UserName);
 
             var project = projectService.Get(idofproj);
@@ -67,8 +65,6 @@ namespace Web.Controllers
 
             var content = projectService.GetContent(idofproj);
             project.Content = content;
-
-
 
             return View(project);//RedirectToAction("GetAll");
         }

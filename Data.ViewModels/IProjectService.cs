@@ -24,7 +24,5 @@ namespace Data.ViewModels
         void AddContent(int id, string Content, string UserName);
 
         Content GetContent(int ProjectID);
-
-        //void UpdateCommentaries(ProjectViewModel projectViewModel, List<Commentary> commentaries);
     }
 }

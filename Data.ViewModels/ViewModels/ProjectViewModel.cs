@@ -1,4 +1,5 @@
 ﻿using Data.Entities;
+using Data.Entities.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,5 +21,7 @@ namespace Data.ViewModels.ViewModels
         public ICollection<Commentary> Comments { get; set; }
 
         public Content Content { get; set; }
+
+        public ICollection<Post> Posts { get; set; }
     }
 }

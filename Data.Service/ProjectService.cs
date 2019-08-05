@@ -18,13 +18,15 @@ namespace Data.Service
         }
         public int Add(ProjectViewModel Entity, string UserName)
         {
-            var project = new Project();
-            project.Title = Entity.Title;
-            project.Created = Entity.Created;
-            project.Subject = Entity.Subject;
-            project.ExpirationDate = Entity.ExpirationDate;
+            var project = new Project
+            {
+                Title = Entity.Title,
+                Created = Entity.Created,
+                Subject = Entity.Subject,
+                ExpirationDate = Entity.ExpirationDate
+            };
 
-            var userName = dbContext.AspNetUsers.Where(a => a.UserName == UserName).ToList()[0];
+            var userName = dbContext.AspNetUsers.Where(a => a.UserName == UserName).ToList().First();
             project.UserId = userName.Id;
 
             dbContext.Projects.Add(project);
@@ -35,14 +37,15 @@ namespace Data.Service
         public void AddCommentary(int Id, string CommentaryText, string UserName)
         {
 
-            var commentary = new Commentary();
-            
-            commentary.Text = CommentaryText;
-            commentary.ProjectId = Id;
-            commentary.Date = DateTime.Now;
-            commentary.UserName = UserName;
+            var commentary = new Commentary
+            {
+                Text = CommentaryText,
+                ProjectId = Id,
+                Date = DateTime.Now,
+                UserName = UserName
+            };
 
-            var userName = dbContext.AspNetUsers.Where(a => a.UserName == UserName).ToList()[0];
+            var userName = dbContext.AspNetUsers.Where(a => a.UserName == UserName).ToList().First();
             commentary.UserId = userName.Id;
 
 
@@ -50,8 +53,10 @@ namespace Data.Service
             var entity = dbContext.Projects.Find(Id);
             commentary.Project = entity;
 
-            entity.Comments = new List<Commentary>();
-            entity.Comments.Add(commentary);
+            entity.Comments = new List<Commentary>
+            {
+                commentary
+            };
 
             dbContext.Commentaries.Add(commentary);
             dbContext.SaveChanges();
@@ -59,13 +64,14 @@ namespace Data.Service
 
         public void AddContent(int id, string Content, string UserName)
         {
-            var content = new Content();
+            var content = new Content
+            {
+                Date = DateTime.Now,
+                ProjectId = id,
+                Text = Content
+            };
 
-            content.Date = DateTime.Now;
-            content.ProjectId = id;
-            content.Text = Content;
-
-            var userName = dbContext.AspNetUsers.Where(a => a.UserName == UserName).ToList()[0];
+            var userName = dbContext.AspNetUsers.Where(a => a.UserName == UserName).ToList().First();
             var entity = dbContext.Projects.Find(id);
             content.Project = entity;
 
@@ -91,7 +97,7 @@ namespace Data.Service
         {
             var content = dbContext.Contents.Where(a => a.ProjectId == ProjectID).ToList();
 
-            return content[0];            
+            return content.First();            
         }
 
         public void Delete(int Id)
@@ -103,13 +109,15 @@ namespace Data.Service
 
         public ProjectViewModel Get(int Id)
         {
-            var projectViewModel = new ProjectViewModel();
             var project = dbContext.Projects.Find(Id);
-            projectViewModel.Id = project.Id;
-            projectViewModel.Title = project.Title;
-            projectViewModel.Created = project.Created;
-            projectViewModel.Subject = project.Subject;
-            projectViewModel.ExpirationDate = project.ExpirationDate;
+            var projectViewModel = new ProjectViewModel
+            {
+                Id = project.Id,
+                Title = project.Title,
+                Created = project.Created,
+                Subject = project.Subject,
+                ExpirationDate = project.ExpirationDate
+            };
             return projectViewModel;
         }
 

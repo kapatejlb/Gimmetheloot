@@ -24,6 +24,15 @@
         <h4>@Model.Content.Date</h4>
         <p></p>
 
+        @if (Model.Posts != null) { 
+            @foreach (var post in Model.Posts)
+            {
+                <p>@post</p>
+                <hr />
+            }
+        }
+
+
 
         <big>Created: @Model.Created</big>
         <p>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data.Entities.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace Data.Entities
@@ -37,6 +38,8 @@ namespace Data.Entities
         public IEnumerable<Commentary> Commentaries { get; set; }
 
         public IEnumerable<Project> Projects { get; set; }
+
+        public IEnumerable<Post> Posts { get; set; }
 
     }
 }

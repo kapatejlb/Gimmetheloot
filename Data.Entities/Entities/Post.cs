@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Data.Entities.Entities
 {
@@ -10,6 +8,13 @@ namespace Data.Entities.Entities
         public string Text { get; set; }
 
         public DateTime Date { get; set; }
+
+
+        public string AspNetUserId { get; set; }
+        public AspNetUsers AspNetUsers { get; set; }
+
+
+
 
         public int ProjectId { get; set; }
         public Project Project { get; set; }
