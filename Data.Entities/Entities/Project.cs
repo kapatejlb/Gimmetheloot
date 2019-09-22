@@ -16,5 +16,9 @@ namespace Data.Entities.Entities
         public ICollection<Commentary> Comments { get; set; }
         public Content Content { get; set; }
         public ICollection<Post> Posts { get; set; }
+
+
+        public string AspNetUserId { get; set; }
+        public AspNetUsers AspNetUsers { get; set; }
     }
 }

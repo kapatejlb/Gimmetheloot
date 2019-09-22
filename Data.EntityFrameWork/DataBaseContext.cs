@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Data.EntityFrameWork
 {
-    class DataBaseContext : DbContext
+    public class DataBaseContext : DbContext
     {
         public DataBaseContext()
         {
@@ -28,23 +28,7 @@ namespace Data.EntityFrameWork
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<Project>(entity =>
-            {
-                entity
-                .HasOne(d => d.Content)
-                .WithOne(p => p.Project)
-                .HasForeignKey<Content>(d => d.ProjectId);
-
-                entity
-                .HasMany(d => d.Comments)
-                .WithOne(p => p.Project)
-                .HasForeignKey(d => d.ProjectId);
-
-                entity
-                .HasMany(d => d.Posts)
-                .WithOne(p => p.Project)
-                .HasForeignKey(d => d.ProjectId);
-            });
+           
 
             modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
@@ -139,6 +123,7 @@ namespace Data.EntityFrameWork
                     .IsUnique()
                     .HasFilter("([NormalizedUserName] IS NOT NULL)");
 
+
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Email).HasMaxLength(256);
@@ -148,6 +133,34 @@ namespace Data.EntityFrameWork
                 entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
 
                 entity.Property(e => e.UserName).HasMaxLength(256);
+
+                entity
+                .HasMany(d => d.Projects)
+                .WithOne(p => p.AspNetUsers)
+                .HasForeignKey(d => d.AspNetUserId);
+
+                entity
+                .HasMany(d => d.Comments)
+                .WithOne(p => p.AspNetUsers)
+                .HasForeignKey(d => d.AspNetUserId);
+            });
+
+            modelBuilder.Entity<Project>(entity =>
+            {
+                entity
+                .HasOne(d => d.Content)
+                .WithOne(p => p.Project)
+                .HasForeignKey<Content>(d => d.ProjectId);
+
+                entity
+                .HasMany(d => d.Comments)
+                .WithOne(p => p.Project)
+                .HasForeignKey(d => d.ProjectId);
+
+                entity
+                .HasMany(d => d.Posts)
+                .WithOne(p => p.Project)
+                .HasForeignKey(d => d.ProjectId);
             });
         }
 

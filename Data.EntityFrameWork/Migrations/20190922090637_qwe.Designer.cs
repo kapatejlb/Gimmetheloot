@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.EntityFrameWork.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20190918211908_fkk")]
-    partial class fkk
+    [Migration("20190922090637_qwe")]
+    partial class qwe
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -188,6 +188,8 @@ namespace Data.EntityFrameWork.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AspNetUserId");
+
                     b.Property<DateTime>("Date");
 
                     b.Property<int>("ProjectId");
@@ -195,6 +197,8 @@ namespace Data.EntityFrameWork.Migrations
                     b.Property<string>("Text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AspNetUserId");
 
                     b.HasIndex("ProjectId");
 
@@ -246,6 +250,8 @@ namespace Data.EntityFrameWork.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AspNetUserId");
+
                     b.Property<DateTime>("Created");
 
                     b.Property<DateTime>("ExpirationDate");
@@ -255,6 +261,8 @@ namespace Data.EntityFrameWork.Migrations
                     b.Property<string>("Title");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AspNetUserId");
 
                     b.ToTable("Projects");
                 });
@@ -306,6 +314,10 @@ namespace Data.EntityFrameWork.Migrations
 
             modelBuilder.Entity("Data.Entities.Entities.Commentary", b =>
                 {
+                    b.HasOne("Data.Entities.Entities.AspNetUsers", "AspNetUsers")
+                        .WithMany("Comments")
+                        .HasForeignKey("AspNetUserId");
+
                     b.HasOne("Data.Entities.Entities.Project", "Project")
                         .WithMany("Comments")
                         .HasForeignKey("ProjectId")
@@ -326,6 +338,13 @@ namespace Data.EntityFrameWork.Migrations
                         .WithMany("Posts")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Data.Entities.Entities.Project", b =>
+                {
+                    b.HasOne("Data.Entities.Entities.AspNetUsers", "AspNetUsers")
+                        .WithMany("Projects")
+                        .HasForeignKey("AspNetUserId");
                 });
 #pragma warning restore 612, 618
         }

@@ -33,5 +33,10 @@ namespace Data.Entities.Entities
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual ICollection<AspNetUserTokens> AspNetUserTokens { get; set; }
+
+
+        public ICollection<Project> Projects { get; set; }
+
+        public ICollection<Commentary> Comments { get; set; }
     }
 }
