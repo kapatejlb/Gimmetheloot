@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Web.Controllers
 {
-    [Authorize(Roles ="admin")]
+    //[Authorize(Roles ="admin")]
     public class UsersController : Controller
     {
         private readonly DataBaseContext _context;
@@ -42,28 +42,6 @@ namespace Web.Controllers
                 return NotFound();
             }
 
-            return View(aspNetUsers);
-        }
-
-        // GET: Users/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Users/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] AspNetUsers aspNetUsers)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(aspNetUsers);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
             return View(aspNetUsers);
         }
 

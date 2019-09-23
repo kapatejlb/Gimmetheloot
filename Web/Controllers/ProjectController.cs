@@ -76,12 +76,18 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Created,Subject,ExpirationDate,AspNetUserId")] Project project)
+        public async Task<IActionResult> Create([Bind("Id,Title,Created,Subject,ExpirationDate,AspNetUserId")] Project project, string ContentText)
         {
             if (ModelState.IsValid)
             {
+
                 _context.Add(project);
                 await _context.SaveChangesAsync();
+
+
+                AddContent(project.Id, ContentText);
+
+
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AspNetUserId"] = new SelectList(_context.AspNetUsers, "Id", "Id", project.AspNetUserId);
@@ -197,5 +203,22 @@ namespace Web.Controllers
         {
             _context.Commentaries.Where(a => a.ProjectId == projid).ToList();   
         }
+
+        public void AddContent(int projid, string ContentText)
+        {
+            var content = new Content
+            {
+                Date = DateTime.Now,
+                ProjectId = projid,
+                Text = ContentText,
+                Project = _context.Projects.Find(projid),
+            };
+
+
+
+            _context.Contents.Add(content);
+            _context.SaveChanges();
+        }
+
     }
 }
