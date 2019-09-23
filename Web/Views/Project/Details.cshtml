@@ -1,0 +1,52 @@
+﻿@model Data.Entities.Entities.Project
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<form asp-action="Details" asp-controller="Project" asp-route-id="@Model.Id">
+    <div class="card text-center">
+        <div class="card-header">
+            <h2>@Model.Title</h2>
+            Subject: @Model.Subject
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                @*@Model.Content.Text*@
+            </h5>
+        </div>
+        <div class="card-footer text-muted">
+            @*@Model.Content.Date*@
+        </div>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+    <p><h5>Enter ur opinion:</h5></p>
+    <p><textarea style="width: 500px; height: 100px;" name="NewCommentary" id="NewCommentary"></textarea></p>
+
+    <div class="form-group">
+        <input type="submit" value="Leave a commentary" class="btn btn-default" />
+    </div>
+</form>
+
+@foreach (var commentary in Model.Comments)
+{
+    <div class="list-group "></div>
+    <div class="card text">
+        <div class="card-header">
+            <h6>@commentary.AspNetUserId</h6> @commentary.Date
+        </div>
+        <div class="card-body">
+            <a>@commentary.Text</a>
+        </div>
+    </div>
+    <hr/>
+}
+
+
+
