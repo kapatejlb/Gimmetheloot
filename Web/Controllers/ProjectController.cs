@@ -50,8 +50,12 @@ namespace Web.Controllers
             return View(project);
         }
         [HttpPost]
-        public async Task<IActionResult> Details(Project project, string NewCommentary)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Details([Bind("Id,Title,Created,Subject,ExpirationDate,AspNetUserId")] Project project, string NewCommentary)
         {
+            int id = project.Id;
+            project = _context.Projects.Where(a => a.Id == id).First();
+
             project.Comments = new List<Commentary>();
             var commentaries = GetCommentaries(project.Id);
             foreach (var commentary in commentaries)
@@ -185,9 +189,12 @@ namespace Web.Controllers
                 ProjectId = project.Id,
                 Text = NewCommentary,
                 Date = DateTime.Now,
-                AspNetUsers = _context.AspNetUsers.Where(a => a.UserName == HttpContext.User.Identity.Name).First(),
-                AspNetUserId = _context.AspNetUsers.Where(a => a.UserName == HttpContext.User.Identity.Name).First().Id
             };
+
+            var AspNetUsers = _context.AspNetUsers.Where(a => a.UserName == HttpContext.User.Identity.Name).First();
+            commentary.AspNetUsers = AspNetUsers;
+            commentary.AspNetUserId = AspNetUsers.Id;
+
             project.Comments.Add(commentary); //= new List<Commentary> { commentary };
         }
         public List<Commentary> GetCommentaries(int projid)
