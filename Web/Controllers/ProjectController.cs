@@ -40,7 +40,7 @@ namespace Web.Controllers
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             project.Comments = new List<Commentary>();
-            var commentaries = GetCommentaries(project.Id);
+            GetCommentaries(project.Id);
 
             if (project == null)
             {
@@ -51,19 +51,14 @@ namespace Web.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Details([Bind("Id,Title,Created,Subject,ExpirationDate,AspNetUserId")] Project project, string NewCommentary)
+        public async Task<IActionResult> Details(int id, string NewCommentary, string UserName)
         {
-            int id = project.Id;
-            project = _context.Projects.Where(a => a.Id == id).First();
+            var project = _context.Projects.Where(a => a.Id == id).First();
 
             project.Comments = new List<Commentary>();
-            var commentaries = GetCommentaries(project.Id);
-            foreach (var commentary in commentaries)
-            {
-                project.Comments.Add(commentary);
-            }
+            GetCommentaries(project.Id);
 
-            AddCommentary(project, NewCommentary);
+            AddCommentary(project, NewCommentary, UserName);
             _context.Projects.Update(project);
             await _context.SaveChangesAsync();
             return View(project);
@@ -181,7 +176,7 @@ namespace Web.Controllers
             return _context.Projects.Any(e => e.Id == id);
         }
 
-        public void AddCommentary(Project project, string NewCommentary)
+        public void AddCommentary(Project project, string NewCommentary, string UserName)
         {
             Commentary commentary = new Commentary
             {
@@ -189,6 +184,7 @@ namespace Web.Controllers
                 ProjectId = project.Id,
                 Text = NewCommentary,
                 Date = DateTime.Now,
+                UserName = UserName,
             };
 
             var AspNetUsers = _context.AspNetUsers.Where(a => a.UserName == HttpContext.User.Identity.Name).First();
@@ -197,10 +193,9 @@ namespace Web.Controllers
 
             project.Comments.Add(commentary); //= new List<Commentary> { commentary };
         }
-        public List<Commentary> GetCommentaries(int projid)
+        public void GetCommentaries(int projid)
         {
-            var commentaries = _context.Commentaries.Where(a => a.ProjectId == projid).ToList();
-            return commentaries;
+            _context.Commentaries.Where(a => a.ProjectId == projid).ToList();   
         }
     }
 }

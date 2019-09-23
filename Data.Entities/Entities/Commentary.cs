@@ -16,6 +16,8 @@ namespace Data.Entities.Entities
         public string AspNetUserId { get; set; }
         public AspNetUsers AspNetUsers { get; set; }
 
+        public string UserName { get; set; }
+
         //public string UserId { get; set; }
         //public AspNetUsers aspNetUser { get; set; }
         //public string UserName { get; set; }

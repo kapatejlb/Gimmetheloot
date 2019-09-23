@@ -6,19 +6,32 @@
 
 <h1>Details</h1>
 
-<form asp-action="Details" asp-controller="Project" asp-route-id="@Model.Id">
-    <div class="card text-center">
-        <div class="card-header">
-            <h2>@Model.Title</h2>
-            Subject: @Model.Subject
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">
-                @*@Model.Content.Text*@
-            </h5>
-        </div>
-        <div class="card-footer text-muted">
-            @*@Model.Content.Date*@
+
+<input value="@Model.Id" name="id" hidden>
+
+<input hidden value="@DateTime.Now" type="text" id="datainput" />
+<form asp-action="Details">
+
+    <input hidden name="UserName" id="UserName" type="text" value="@User.Identity.Name">
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="card text-center">
+                <div class="card-header">
+                    <h2>@Model.Title</h2>
+                    Subject: @Model.Subject
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        @*@Model.Content.Text*@
+                    </h5>
+                </div>
+                <div class="card-footer text-muted">
+                    @*@Model.Content.Date*@
+                </div>
+            </div>
+
         </div>
     </div>
     <div>
@@ -34,19 +47,19 @@
     </div>
 </form>
 
-@foreach (var commentary in Model.Comments)
-{
-    <div class="list-group "></div>
-    <div class="card text">
-        <div class="card-header">
-            <h6>@commentary.AspNetUserId</h6> @commentary.Date
+    @foreach (var commentary in Model.Comments)
+    {
+        <div class="list-group "></div>
+        <div class="card text">
+            <div class="card-header">
+                <h6>@commentary.UserName</h6> @commentary.Date
+            </div>
+            <div class="card-body">
+                <a>@commentary.Text</a>
+            </div>
         </div>
-        <div class="card-body">
-            <a>@commentary.Text</a>
-        </div>
-    </div>
-    <hr/>
-}
+        <hr />
+    }
 
 
 
