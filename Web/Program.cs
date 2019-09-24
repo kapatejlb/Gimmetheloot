@@ -7,7 +7,9 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-
+/// <summary>
+/// /
+/// </summary>
 namespace Web
 {
     public class Program
