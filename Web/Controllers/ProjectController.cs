@@ -109,6 +109,8 @@ namespace Web.Controllers
             }
 
             var project = await _context.Projects.FindAsync(id);
+            GetContent(id);
+
             if (project == null)
             {
                 return NotFound();
@@ -122,7 +124,7 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Created,Subject,ExpirationDate,AspNetUserId")] Project project)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Created,Subject,ExpirationDate,AspNetUserId")] Project project, string ContentText)
         {
             if (id != project.Id)
             {
@@ -133,6 +135,11 @@ namespace Web.Controllers
             {
                 try
                 {
+                    Content content = _context.Contents.Where(a => a.ProjectId == id).ToList().First();
+
+                    content.Date = DateTime.Now;
+                    content.Text = ContentText;
+
                     _context.Update(project);
                     await _context.SaveChangesAsync();
                 }
