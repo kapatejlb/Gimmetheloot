@@ -40,6 +40,8 @@ namespace Web.Controllers
                 .Include(p => p.AspNetUsers)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
+            GetContent(id);
+
             project.Comments = new List<Commentary>();
             GetCommentaries(project.Id);
 
@@ -55,6 +57,8 @@ namespace Web.Controllers
         public async Task<IActionResult> Details(int id, string NewCommentary, string UserName)
         {
             var project = _context.Projects.Where(a => a.Id == id).First();
+
+            GetContent(id);
 
             project.Comments = new List<Commentary>();
             GetCommentaries(project.Id);
@@ -216,10 +220,13 @@ namespace Web.Controllers
                 Project = _context.Projects.Find(projid),
             };
 
-
-
             _context.Contents.Add(content);
             _context.SaveChanges();
+        }
+
+        public void GetContent(int? projid)
+        {
+            _context.Contents.Where(a => a.ProjectId == projid).ToList();
         }
 
     }
