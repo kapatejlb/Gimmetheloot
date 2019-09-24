@@ -1,0 +1,67 @@
+﻿@model Data.Entities.Entities.Project
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+
+<input value="@Model.Id" name="id" hidden>
+
+<input hidden value="@DateTime.Now" type="text" id="datainput" />
+<form asp-action="Details">
+
+    <input hidden name="UserName" id="UserName" type="text" value="@User.Identity.Name">
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="card text-center">
+                <div class="card-header">
+                    <h2>@Model.Title</h2>
+                    Subject: @Model.Subject
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        @*@Model.Content.Text*@
+                    </h5>
+                </div>
+                <div class="card-footer text-muted">
+                    @*@Model.Content.Date*@
+                </div>
+            </div>
+            <div>@Model.Created</div>
+            <div>@Model.ExpirationDate</div>
+
+        </div>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+    <p><h5>Enter ur opinion:</h5></p>
+    <p><textarea style="width: 500px; height: 100px;" name="NewCommentary" id="NewCommentary"></textarea></p>
+
+    <div class="form-group">
+        <input type="submit" value="Leave a commentary" class="btn btn-default" />
+    </div>
+</form>
+
+    @foreach (var commentary in Model.Comments)
+    {
+        <div class="list-group "></div>
+        <div class="card text">
+            <div class="card-header">
+                <b>@commentary.UserName</b> commented at @commentary.Date
+            </div>
+            <div class="card-body">
+                <a>@commentary.Text</a>
+            </div>
+        </div>
+        <hr />
+    }
+
+
+
