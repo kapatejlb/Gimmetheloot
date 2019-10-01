@@ -4,6 +4,8 @@
     ViewData["Title"] = "Details";
 }
 
+
+@Html.Partial("_Project")
 <h1>Details</h1>
 
 
@@ -49,19 +51,22 @@
     </div>
 </form>
 
-    @foreach (var commentary in Model.Comments)
-    {
-        <div class="list-group "></div>
-        <div class="card text">
-            <div class="card-header">
-                <b>@commentary.UserName</b> commented at @commentary.Date
-            </div>
-            <div class="card-body">
-                <a>@commentary.Text</a>
-            </div>
+
+@*@foreach (var commentary in Model.Comments)
+{
+    <div class="list-group "></div>
+    <div class="card text">
+        <div class="card-header">
+            <b>@commentary.UserName</b> commented at @commentary.Date
         </div>
-        <hr />
-    }
+        <div class="card-body">
+            <a>@commentary.Text</a>
+        </div>
+    </div>
+    <hr />
+}*@
+
+@Html.Partial("_Commentaries")
 
 
 

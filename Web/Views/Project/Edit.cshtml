@@ -6,7 +6,7 @@
 }
 
 <h1>Edit</h1>
-<h4>Project</h4>
+@Html.Partial("_Project")
 <hr />
 
 <div class="row">
@@ -58,5 +58,5 @@
 
 
 @*@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}*@
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }*@

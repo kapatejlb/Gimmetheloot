@@ -1,0 +1,15 @@
+﻿@model Data.Entities.Entities.Project
+
+@foreach (var commentary in Model.Comments)
+{
+    <div class="list-group "></div>
+    <div class="card text">
+        <div class="card-header">
+            <b>@commentary.UserName</b> commented at @commentary.Date
+        </div>
+        <div class="card-body">
+            <a>@commentary.Text</a>
+        </div>
+    </div>
+    <hr />
+}

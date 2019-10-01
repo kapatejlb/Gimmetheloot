@@ -10,6 +10,11 @@ namespace Web.Controllers
 {
     public class HomeController : Controller
     {
+        public ActionResult GetMessage()
+        {
+            return PartialView("_GetMessage");
+        }
+
         public IActionResult Index()
         {
             return View();

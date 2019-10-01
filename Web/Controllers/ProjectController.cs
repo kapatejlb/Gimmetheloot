@@ -21,6 +21,18 @@ namespace Web.Controllers
             _context = context;
         }
 
+
+        //particular
+        public ActionResult WriteProject()
+        {
+            return PartialView("_Project");
+        }
+
+        public ActionResult Connentaries()
+        {
+            return PartialView("_Commentaries");
+        }
+
         // GET: Project
         public async Task<IActionResult> Index()
         {
