@@ -36,6 +36,7 @@ namespace GimmeTheLoot
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
             //services.AddControllersWithViews();
             //services.AddRazorPages();
+
             services.AddIdentity<AspNetUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
