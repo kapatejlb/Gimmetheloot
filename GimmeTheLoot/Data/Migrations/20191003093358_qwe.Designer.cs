@@ -4,14 +4,16 @@ using GimmeTheLoot.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GimmeTheLoot.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191003093358_qwe")]
+    partial class qwe
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -325,7 +327,7 @@ namespace GimmeTheLoot.Data.Migrations
             modelBuilder.Entity("GimmeTheLoot.Models.Commentary", b =>
                 {
                     b.HasOne("GimmeTheLoot.Models.AspNetUser", "AspNetUser")
-                        .WithMany("Comments")
+                        .WithMany()
                         .HasForeignKey("AspNetUserId");
 
                     b.HasOne("GimmeTheLoot.Models.Project", "Project")
@@ -356,7 +358,7 @@ namespace GimmeTheLoot.Data.Migrations
             modelBuilder.Entity("GimmeTheLoot.Models.Project", b =>
                 {
                     b.HasOne("GimmeTheLoot.Models.AspNetUser", "AspNetUser")
-                        .WithMany("Projects")
+                        .WithMany()
                         .HasForeignKey("AspNetUserId");
                 });
 
