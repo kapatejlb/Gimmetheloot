@@ -14,6 +14,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using GimmeTheLoot.Models;
 
+using GimmeTheLoot.Hubs;
+
 namespace GimmeTheLoot
 {
     public class Startup
@@ -36,6 +38,9 @@ namespace GimmeTheLoot
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
             //services.AddControllersWithViews();
             //services.AddRazorPages();
+
+            services.AddRazorPages();
+            services.AddSignalR();
 
             services.AddIdentity<AspNetUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -72,6 +77,7 @@ namespace GimmeTheLoot
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapHub<ChatHub>("/chatHub");
             });
         }
     }
