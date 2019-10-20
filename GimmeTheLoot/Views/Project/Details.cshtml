@@ -5,13 +5,16 @@
 }
 
 
+<input hidden id="user" value="@User.Identity.Name" />
+
+<input hidden value="@Model.Id" name="id" id="id">
+
+<input hidden value="@DateTime.Now" type="text" id="datainput" />
+
 @Html.Partial("_Project")
 <h1>Details</h1>
 
 
-<input value="@Model.Id" name="id" hidden>
-
-<input hidden value="@DateTime.Now" type="text" id="datainput" />
 <form asp-action="Details">
 
     <input hidden name="UserName" id="UserName" type="text" value="@User.Identity.Name">
@@ -47,10 +50,13 @@
     <p><textarea style="width: 500px; height: 100px;" name="NewCommentary" id="NewCommentary"></textarea></p>
 
     <div class="form-group">
-        <input type="submit" value="Leave a commentary" class="btn btn-default" />
+        <input type="submit" value="Leave a commentary" class="btn btn-default" id="sendButton" />
     </div>
 </form>
 
+
+
+<div id="messagesList">23</div>
 
 @*@foreach (var commentary in Model.Comments)
     {
@@ -67,6 +73,9 @@
     }*@
 
 @Html.Partial("_Commentaries")
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>
 
 
 

@@ -74,7 +74,7 @@ namespace GimmeTheLoot.Controllers
             project.Comments = new List<Commentary>();
             GetCommentaries(project.Id);
 
-            AddCommentary(project, NewCommentary, UserName);
+            //AddCommentary(project, NewCommentary, UserName);
             _context.Projects.Update(project);
             await _context.SaveChangesAsync();
             return View(project);

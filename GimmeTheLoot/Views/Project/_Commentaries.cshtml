@@ -2,7 +2,6 @@
 
 @foreach (var commentary in Model.Comments)
 {
-    <div class="list-group "></div>
     <div class="card text">
         <div class="card-header">
             <b>@commentary.UserName</b> commented at @commentary.Date
@@ -13,3 +12,6 @@
     </div>
     <hr />
 }
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>
