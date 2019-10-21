@@ -8,16 +8,49 @@ using Microsoft.EntityFrameworkCore;
 using GimmeTheLoot.Data;
 using GimmeTheLoot.Models;
 using System.Security.Claims;
+using System.Globalization;
+using Microsoft.Extensions.Localization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Http;
 
 namespace GimmeTheLoot.Controllers
 {
-    public class ProjectController : Controller
+    public class ProjectsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IStringLocalizer<ProjectsController> _localizer;
 
-        public ProjectController(ApplicationDbContext context)
+        public ProjectsController(ApplicationDbContext context, IStringLocalizer<ProjectsController> localizer)
         {
+            _localizer = localizer;
             _context = context;
+        }
+
+
+        public IActionResult Index2()
+        {
+            //ViewData["Title"] = _localizer["Header"];
+            //ViewData["Message"] = _localizer["Message"];
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
+
+            return LocalRedirect(returnUrl);
+        }
+
+
+
+        public string GetCulture()
+        {
+            return $"CurrentCulture:{CultureInfo.CurrentCulture.Name}, CurrentUICulture:{CultureInfo.CurrentUICulture.Name}";
         }
 
         //particular

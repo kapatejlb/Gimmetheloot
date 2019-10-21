@@ -55,8 +55,7 @@ namespace GimmeTheLoot.Hubs
             commentary.AspNetUser = AspNetUser;
             commentary.AspNetUserId = AspNetUser.Id;
 
-            project.Comments.Add(commentary); //= new List<Commentary> { commentary };
-
+            project.Comments.Add(commentary);
         }
     }
 }
