@@ -20,17 +20,19 @@ namespace GimmeTheLoot.Hubs
         }
         public async Task SendMessage(string user, string message, string projid)
         {
-                int id = Convert.ToInt16(projid);
-                var project = context.Projects.Where(a => a.Id == id).First();
-                project.Comments = new List<Commentary>();
-                GetCommentaries(project.Id);
+            int id = Convert.ToInt16(projid);
+            var project = context.Projects.Where(a => a.Id == id).First();
+            project.Comments = new List<Commentary>();
+            GetCommentaries(project.Id);
 
-                AddCommentary(project, message, user);
+            AddCommentary(project, message, user);
 
-                //context.Projects.Update(project);
-                await context.SaveChangesAsync();
+            //context.Projects.Update(project);
+            await context.SaveChangesAsync();
 
-                await Clients.All.SendAsync("ReceiveMessage", user, message);
+            DateTime date = DateTime.Now;
+            await Clients.All.SendAsync("ReceiveMessage", user, message, date.ToString("d"));
+
         }
 
         public void GetCommentaries(int projid)
