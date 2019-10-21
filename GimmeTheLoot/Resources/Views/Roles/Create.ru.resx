@@ -117,11 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="A list of users" xml:space="preserve">
+    <value>A list of users</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="Add role" xml:space="preserve">
+    <value>Add role</value>
+  </data>
   <data name="Are you sure you want to delete this?" xml:space="preserve">
     <value>Вы уверены, что хотите удалить этот проект?</value>
   </data>
   <data name="Back to List" xml:space="preserve">
     <value>Назад к списку</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Создать</value>
   </data>
   <data name="Created" xml:space="preserve">
     <value>Дата создания</value>
@@ -131,6 +143,12 @@
   </data>
   <data name="ExpirationDate" xml:space="preserve">
     <value>Дата окончания</value>
+  </data>
+  <data name="List of roles1" xml:space="preserve">
+    <value>List of roles</value>
+  </data>
+  <data name="New Role" xml:space="preserve">
+    <value>Новая роль</value>
   </data>
   <data name="Subject" xml:space="preserve">
     <value>Тег</value>

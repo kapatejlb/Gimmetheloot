@@ -1,2 +1,4 @@
-﻿<h1>_Project</h1>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
+    <h1>@Localizer["Project"]</h1>

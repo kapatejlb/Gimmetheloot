@@ -1,11 +1,13 @@
 ﻿@model GimmeTheLoot.Models.Project
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
 @{
     ViewData["Title"] = "Edit";
     var AllowedCategories = new List<string>() { "Arts", "Comics & Illustration", "Design & Tech", "Film", "Food & Craft", "Games", "Publishing" };
 }
 
-<h1>Edit</h1>
+<h1>@Localizer["Edit"]</h1>
 @Html.Partial("_Project")
 <hr />
 
@@ -15,13 +17,13 @@
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+            <p>@Localizer["Title"]</p>
             <div class="form-group" style="width: 500px;">
-                <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
 
-            <p>Categories</p>
+            <p>@Localizer["Categories"]</p>
             <select asp-for="Subject" style="width: 500px">
                 @foreach (var value in AllowedCategories)
                 {
@@ -34,16 +36,16 @@
             <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
             <p></p>
-            <p>Content</p>
+            <p>@Localizer["Content"]</p>
             <textarea id="ContentText" name="ContentText" style="width: 300%">@Model.Content.Text</textarea>
 
+            <p>@Localizer["Created"]</p>
             <div class="form-group">
-                <label asp-for="Created" class="control-label"></label>
                 <input asp-for="Created" class="form-control" />
                 <span asp-validation-for="Created" class="text-danger"></span>
             </div>
 
-            <p>Expiration Date</p>
+            <p>@Localizer["Expiration Date"]</p>
             <div class="form-group">
                 <input asp-for="ExpirationDate" class="form-control" />
                 <span asp-validation-for="ExpirationDate" class="text-danger"></span>

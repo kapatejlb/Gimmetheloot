@@ -1,4 +1,6 @@
 ﻿@model GimmeTheLoot.Models.Project
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
 @{
     ViewData["Title"] = "Details";
@@ -12,7 +14,7 @@
 <input hidden value="@DateTime.Now" type="text" id="datainput" />
 
 @Html.Partial("_Project")
-<h1>Details</h1>
+<h1>@Localizer["Details"]</h1>
 
 
 <form asp-action="Details">
@@ -25,7 +27,7 @@
             <div class="card text-center">
                 <div class="card-header">
                     <h2>@Model.Title</h2>
-                    Subject: @Model.Subject
+                    @Localizer["Subject"]: @Model.Subject
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">
@@ -42,15 +44,15 @@
         </div>
     </div>
     <div>
-        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Edit" asp-route-id="@Model.Id">@Localizer["Edit"]</a> |
+        <a asp-action="Index">@Localizer["Back to List"]</a>
     </div>
 
-    <p><h5>Enter ur opinion:</h5></p>
+    <p><h5>@Localizer["Enter ur opinion"]:</h5></p>
     <p><textarea style="width: 500px; height: 100px;" name="NewCommentary" id="NewCommentary"></textarea></p>
 
     <div class="form-group">
-        <input type="submit" value="Leave a commentary" class="btn btn-default" id="sendButton" />
+        <input type="submit" value="@Localizer["Leave a commentary"]" class="btn btn-default" id="sendButton" />
     </div>
 </form>
 
@@ -58,24 +60,7 @@
 
 <div id="messagesList"></div>
 
-@*@foreach (var commentary in Model.Comments)
-    {
-        <div class="list-group "></div>
-        <div class="card text">
-            <div class="card-header">
-                <b>@commentary.UserName</b> commented at @commentary.Date
-            </div>
-            <div class="card-body">
-                <a>@commentary.Text</a>
-            </div>
-        </div>
-        <hr />
-    }*@
-
 @Html.Partial("_Commentaries")
-
-@*<script src="~/js/signalr/dist/browser/signalr.js"></script>
-<script src="~/js/chat.js"></script>*@
 
 
 

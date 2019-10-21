@@ -1,11 +1,14 @@
 ﻿@model GimmeTheLoot.Models.Project
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
 
 @foreach (var commentary in Model.Comments.Reverse())
 {
     <div id="commentdiv">
         <div class="card text">
             <div class="card-header">
-                <b>@commentary.UserName</b> commented at @commentary.Date
+                <b>@commentary.UserName</b> @Localizer["commented at"] @commentary.Date
             </div>
             <div class="card-body">
                 <a>@commentary.Text</a>
