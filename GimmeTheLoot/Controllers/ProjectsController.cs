@@ -71,12 +71,12 @@ namespace GimmeTheLoot.Controllers
 
             GetContent(id);
 
-            project.Comments = new List<Commentary>();
-            GetCommentaries(project.Id);
+            //project.Comments = new List<Commentary>();
+            //GetCommentaries(project.Id);
 
             //AddCommentary(project, NewCommentary, UserName);
-            _context.Projects.Update(project);
-            await _context.SaveChangesAsync();
+            //_context.Projects.Update(project);
+            //await _context.SaveChangesAsync();
             return View(project);
         }
 

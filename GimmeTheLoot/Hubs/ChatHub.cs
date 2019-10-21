@@ -23,15 +23,16 @@ namespace GimmeTheLoot.Hubs
             int id = Convert.ToInt16(projid);
             var project = context.Projects.Where(a => a.Id == id).First();
             project.Comments = new List<Commentary>();
+            AddCommentary(project, message, user);
             GetCommentaries(project.Id);
 
-            AddCommentary(project, message, user);
+            
 
             //context.Projects.Update(project);
             await context.SaveChangesAsync();
 
             DateTime date = DateTime.Now;
-            await Clients.All.SendAsync("ReceiveMessage", user, message, date.ToString("d"));
+            await Clients.All.SendAsync("ReceiveMessage", user, message, date.ToString());
 
         }
 

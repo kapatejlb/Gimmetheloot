@@ -7,13 +7,12 @@ document.getElementById("sendButton").disabled = true;
 
 connection.on("ReceiveMessage", function (user, message, date) {
 
-    var msg = `<h3>` + user + " commented at " + date + `</h3> <h4>` + message + `</h4>` + `<hr />`;
-
-    //msg = `<div> <b>` + user + `</b>` + "comemnted at" + date + `</div> <div> <a>` + message + `</a> </div>`;  
+    
+    var msg = `<div class="card text"> <div class="card-header"> <b>` + user + `</b>` + " comemnted at " + date + `</div> <div class="card-body"> <a>` + message + `</a> </div> </div> <hr />`;  
 
     var div = document.createElement("div");
     div.innerHTML = msg;
-    document.getElementById("messagesList").appendChild(div);
+    document.getElementById("commentdiv").prepend(div);
 });
 
 connection.start().then(function () {
