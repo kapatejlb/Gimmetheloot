@@ -31,8 +31,6 @@ namespace GimmeTheLoot.Hubs
                 await context.SaveChangesAsync();
 
                 await Clients.All.SendAsync("ReceiveMessage", user, message);
-            
-
         }
 
         public void GetCommentaries(int projid)
