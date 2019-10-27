@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Authorization;
 using GimmeTheLoot.Data;
 using GimmeTheLoot.Models;
 
+using GimmeTheLoot.Enums;
+
 namespace GimmeTheLoot.Controllers
 {
     [Authorize(Roles = "admin")]
@@ -18,11 +20,55 @@ namespace GimmeTheLoot.Controllers
     public class UsersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private int page;
+        private int pageSize;
+        private int recordsPerPage;
+        private int TotalItemCount;
 
         public UsersController(ApplicationDbContext context)
         {
             _context = context;
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public ActionResult Index2()
+        {
+
+            var page = 1;
+            pageSize = 0;
+            recordsPerPage = 5;
+            TotalItemCount = 0;
+
+            var allusers = _context.AspNetUsers.Where(d => d.UserName != "123").ToList();
+            var users = _context.Search(users: allusers, page: page, recordsPerPage: recordsPerPage, term: "", sortBy: SortBy.AddDate, sortOrder: SortOrder.Desc, pageSize: out pageSize, TotalItemCount: out TotalItemCount);
+
+            ViewBag.PageSize = pageSize;
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalItemCount = TotalItemCount;
+
+            return View(users);
+        }
+
+
+
+        public ActionResult Search(int page = 1, string term = "", SortBy sortBy = SortBy.AddDate, SortOrder sortOrder = SortOrder.Desc)
+        {
+
+            pageSize = 0;
+            recordsPerPage = 5;
+            TotalItemCount = 0;
+
+            var allusers = _context.AspNetUsers.Where(d => d.UserName != "123").ToList();
+            var users = _context.Search(users: allusers, page: page, recordsPerPage: recordsPerPage, term: term, sortBy: sortBy, sortOrder: sortOrder, pageSize: out pageSize, TotalItemCount: out TotalItemCount);
+
+
+            ViewBag.PageSize = pageSize;
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalItemCount = TotalItemCount;
+
+            return PartialView("_UsersList", users);
+        }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
         // GET: Users
         public async Task<IActionResult> Index()
