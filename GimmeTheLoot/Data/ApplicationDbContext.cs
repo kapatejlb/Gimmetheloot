@@ -57,13 +57,33 @@ namespace GimmeTheLoot.Data
         }
 
 
-        public void Create(AspNetUser input, List<AspNetUser> users)
+        public void Create(AspNetUser u, List<AspNetUser> users)
         {
             //users = new List<AspNetUser>();////////
             users.Add(
                 new AspNetUser
                 {
-                    Id = input.Id,
+                    Id = u.Id,
+                    UserName = u.UserName,
+                    NormalizedUserName = u.NormalizedUserName,
+                    PhoneNumber = u.PhoneNumber,
+                    PhoneNumberConfirmed = u.PhoneNumberConfirmed,
+                    Email = u.Email,
+                    EmailConfirmed = u.EmailConfirmed,
+                    NormalizedEmail = u.NormalizedEmail,
+
+                    AccessFailedCount = u.AccessFailedCount,
+
+                    TwoFactorEnabled = u.TwoFactorEnabled,
+
+                    Comments = u.Comments,
+                    ConcurrencyStamp = u.ConcurrencyStamp,
+                    LockoutEnabled = u.LockoutEnabled,
+                    LockoutEnd = u.LockoutEnd,
+                    PasswordHash = u.PasswordHash,
+                    Projects = u.Projects,
+                    SecurityStamp = u.SecurityStamp,
+                    //Id = input.Id,
                     //Family = input.Family,
                     //Name = input.Name,
                     //AddDate = input.AddDate
@@ -84,7 +104,8 @@ namespace GimmeTheLoot.Data
 
             if (!string.IsNullOrEmpty(term))
             {
-                //queryable = queryable.Where(c => c.Family.Contains(term) || c.Name.Contains(term));
+                queryable = queryable.Where(c => c.UserName.Contains(term) || c.Email.Contains(term) || c.NormalizedEmail.Contains(term)
+                || c.PhoneNumber.Contains(term));
 
             }
 
@@ -101,9 +122,12 @@ namespace GimmeTheLoot.Data
                 //case SortBy.AddDate:
                 //    queryable = sortOrder == SortOrder.Asc ? queryable.OrderBy(u => u.AddDate) : queryable.OrderByDescending(u => u.AddDate);
                 //    break;
-                //case SortBy.DisplayName:
-                //    queryable = sortOrder == SortOrder.Asc ? queryable.OrderBy(u => u.Name).ThenBy(u => u.Family) : queryable.OrderByDescending(u => u.Name).ThenByDescending(u => u.Family);
-                //    break;
+                case SortBy.AddDate:
+                    queryable = sortOrder == SortOrder.Asc ? queryable.OrderBy(u => u.Email).ThenBy(u => u.EmailConfirmed) : queryable.OrderByDescending(u => u.Email).ThenByDescending(u => u.EmailConfirmed);
+                    break;
+                case SortBy.DisplayName:
+                    queryable = sortOrder == SortOrder.Asc ? queryable.OrderBy(u => u.UserName).ThenBy(u => u.PhoneNumber) : queryable.OrderByDescending(u => u.UserName).ThenByDescending(u => u.PhoneNumber);
+                    break;
                 default:
                     break;
             }
@@ -136,6 +160,26 @@ namespace GimmeTheLoot.Data
             return queryable.Select(u => new AspNetUser
             {
                 Id = u.Id,
+                UserName = u.UserName,
+                NormalizedUserName = u.NormalizedUserName,
+                PhoneNumber = u.PhoneNumber,
+                PhoneNumberConfirmed = u.PhoneNumberConfirmed,
+                Email = u.Email,
+                EmailConfirmed = u.EmailConfirmed,
+                NormalizedEmail = u.NormalizedEmail,
+
+                AccessFailedCount = u.AccessFailedCount,
+
+                TwoFactorEnabled = u.TwoFactorEnabled,
+
+                Comments = u.Comments,
+                ConcurrencyStamp = u.ConcurrencyStamp, 
+                LockoutEnabled = u.LockoutEnabled,
+                LockoutEnd = u.LockoutEnd, 
+                PasswordHash = u.PasswordHash,
+                Projects = u.Projects,
+                SecurityStamp = u.SecurityStamp,
+
                 //AddDate = u.AddDate.ToShortDateString(),
                 //Name = u.Name,
                 //Family = u.Family,
