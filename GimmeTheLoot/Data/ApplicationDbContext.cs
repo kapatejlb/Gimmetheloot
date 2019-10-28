@@ -95,7 +95,7 @@ namespace GimmeTheLoot.Data
         public IEnumerable<AspNetUser> Search(List<AspNetUser> users, int page, int recordsPerPage, string term, SortBy sortBy, SortOrder sortOrder, out int pageSize, out int TotalItemCount)
         {
             //users = new List<AspNetUser>();/////////
-            var queryable = users.AsQueryable();
+            var queryable = AspNetUsers.AsQueryable();
 
 
             #region بر اساس متن
@@ -191,8 +191,6 @@ namespace GimmeTheLoot.Data
         public DbSet<Commentary> Commentaries { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Content> Contents { get; set; }
-
-
         public DbSet<AspNetUser> AspNetUsers { get; set; }
     }
 }

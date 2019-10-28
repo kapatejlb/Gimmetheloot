@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GimmeTheLoot", "GimmeTheLoot\GimmeTheLoot.csproj", "{99847F24-C05C-4B4A-8479-78D5DEFEAE91}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcPagedList.Core", "C:\Users\vlad\Desktop\MvcPagedList.Core-master\MvcPagedList.Core\MvcPagedList.Core.csproj", "{748589A1-3C52-4895-9B83-4639A58D8223}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcPagedList.Core", "MvcPagedList.Core\MvcPagedList.Core.csproj", "{635A806E-29BD-4D2D-93AD-A5ADE43A75F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{99847F24-C05C-4B4A-8479-78D5DEFEAE91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99847F24-C05C-4B4A-8479-78D5DEFEAE91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99847F24-C05C-4B4A-8479-78D5DEFEAE91}.Release|Any CPU.Build.0 = Release|Any CPU
-		{748589A1-3C52-4895-9B83-4639A58D8223}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{748589A1-3C52-4895-9B83-4639A58D8223}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{748589A1-3C52-4895-9B83-4639A58D8223}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{748589A1-3C52-4895-9B83-4639A58D8223}.Release|Any CPU.Build.0 = Release|Any CPU
+		{635A806E-29BD-4D2D-93AD-A5ADE43A75F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{635A806E-29BD-4D2D-93AD-A5ADE43A75F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{635A806E-29BD-4D2D-93AD-A5ADE43A75F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{635A806E-29BD-4D2D-93AD-A5ADE43A75F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
