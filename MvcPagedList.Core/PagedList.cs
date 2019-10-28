@@ -74,12 +74,6 @@ namespace MvcPagedList.Core
             ul.AddCssClass(pagerOptions.UlElementClasses);
         }
 
-
-
-
-        /// <summary>
-        /// 
-        /// </summary>
         private static void InitialPager(PagerOptions pagerOptions)
         {
             hasNextPage = pagerOptions.currentPage < pagerOptions.PageCount;
@@ -89,12 +83,6 @@ namespace MvcPagedList.Core
 
         }
 
-
-
-
-        /// <summary>
-        /// 
-        /// </summary>
         private static void GenerateNextBtn(string actionName, string controllerName, string areaName, object routeValues, object ajaxAttributes, PagerOptions pagerOptions)
         {
 
@@ -110,13 +98,6 @@ namespace MvcPagedList.Core
             }
         }
 
-
-
-
-
-        /// <summary>
-        /// 
-        /// </summary>
         private static void GeneratePageNumbers(string actionName, string controllerName, string areaName, object routeValues, object ajaxAttributes, PagerOptions pagerOptions)
         {
 
@@ -144,11 +125,6 @@ namespace MvcPagedList.Core
             }
         }
 
-
-
-        /// <summary>
-        /// 
-        /// </summary>
         private static void GeneratePrevBtn(string actionName, string controllerName, string areaName, object routeValues, object ajaxAttributes, PagerOptions pagerOptions)
         {
             if (pagerOptions.DisplayLinkToPreviousPage == PagedListDisplayMode.Always || (pagerOptions.DisplayLinkToPreviousPage == PagedListDisplayMode.IfNeeded && !isFirstPage))
@@ -163,10 +139,6 @@ namespace MvcPagedList.Core
             }
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
         private static void GenerateInfoArea(PagerOptions pagerOptions)
         {
 
@@ -189,8 +161,6 @@ namespace MvcPagedList.Core
                     infoDiv.InnerHtml.AppendHtml(nextBtn);
                 }
 
-              
-
                 if (pagerOptions.DisplayPageCountAndCurrentLocation == true)
                 {
 
@@ -201,7 +171,6 @@ namespace MvcPagedList.Core
 
                 }
 
-
                 if (pagerOptions.DisplayTotalItemCount == true)
                 {
                     var totalInfoDiv = new TagBuilder("div");
@@ -210,21 +179,12 @@ namespace MvcPagedList.Core
                     infoDiv.InnerHtml.AppendHtml(totalInfoDiv);
                 }
 
-
                 footerDiv.InnerHtml.AppendHtml(infoDiv);
 
                 wrapper.InnerHtml.AppendHtml(footerDiv);
             }
-
-
         }
 
-
-
-
-        /// <summary>
-        /// 
-        /// </summary>
         private static void MergeUrlAttribute(this TagBuilder tagBuilder, string actionName, string controllerName, string areaName, object routeValues, int page)
         {
             string values = string.Empty;
@@ -242,12 +202,6 @@ namespace MvcPagedList.Core
 
         }
 
-
-
-
-        /// <summary>
-        /// 
-        /// </summary>
         private static void MergeAjaxAttribute(this TagBuilder tagBuilder, object ajaxAttributes)
         {
             if (ajaxAttributes == null)

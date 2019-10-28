@@ -20,7 +20,6 @@ namespace MvcPagedList.Core
             UlElementClasses = "mp-pagination";
             LiElementClasses = "";
         }
-
         public PagedListDisplayMode DisplayMode { get; set; }
         public PagedListDisplayMode DisplayLinkToPreviousPage { get; set; }
         public PagedListDisplayMode DisplayLinkToNextPage { get; set; }
