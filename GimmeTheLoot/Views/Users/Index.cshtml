@@ -1,85 +1,38 @@
-﻿@model IEnumerable<GimmeTheLoot.Models.AspNetUser>
-@using Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
-
-
-@{
-    ViewData["Title"] = "Index";
+﻿@{
+    ViewBag.Title = "Home Page";
 }
-
-<h1>Index</h1>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Localizer["UserName"]
-            </th>
-
-            <th>
-                @Localizer["Email"]
-            </th>
-            <th>
-                @Localizer["NormalizedEmail"]
-            </th>
+@model IEnumerable<AspNetUser>
+@using GimmeTheLoot.Enums
 
 
-            <th>
-                @Localizer["PhoneNumber"]
-            </th>
-            <th>
-                @Localizer["PhoneNumberConfirmed"]
-            </th>
-            <th>
-                @Localizer["TwoFactorEnabled"]
-            </th>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <form class="form-inline" id="search-form" asp-action="search" data-ajax="true" data-ajax-method="GET" data-ajax-update="#ajax-show-list" data-ajax-loading="#global-ajax-loading">
+            <div class="form-group">
+                @Html.TextBox("term", null, new { @class = "form-control", id = "", placeholder = "search ..." })
+            </div>
+            <div class="form-group">
+                @Html.DropDownList("SortBy", Html.GetEnumSelectList(typeof(SortBy)), new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.DropDownList("SortOrder", Html.GetEnumSelectList(typeof(SortOrder)), new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Search" />
+            </div>
+        </form>
+    </div>
+    <div class="panel-body" id="ajax-show-list">
+        @Html.Partial("_UsersList", Model)
+    </div>
+</div>
 
-            <th>
-                @Localizer["LockoutEnabled"]
-            </th>
-            <th>
-                @Localizer["AccessFailedCount"]
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
+<div class="loading-inner" id="global-ajax-loading">
+    <div class="loading">
+        <div class="loading-figure"></div>
+    </div>
+</div>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NormalizedEmail)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.PhoneNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PhoneNumberConfirmed)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TwoFactorEnabled)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.LockoutEnabled)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AccessFailedCount)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">@Localizer["Edit"]</a> 
-                    <a asp-action="Details" asp-route-id="@item.Id">@Localizer["Details"]</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">@Localizer["Delete"]</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

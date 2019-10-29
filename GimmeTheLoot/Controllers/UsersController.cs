@@ -28,18 +28,19 @@ namespace GimmeTheLoot.Controllers
         public UsersController(ApplicationDbContext context)
         {
             _context = context;
-        }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public ActionResult Index2()
-        {
-
-            var page = 1;
             pageSize = 0;
             recordsPerPage = 5;
             TotalItemCount = 0;
+        }
 
-            var allusers = _context.AspNetUsers.Where(d => d.UserName != "123").ToList();
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public ActionResult Index()
+        {
+
+            var page = 1;
+
+
+            var allusers = _context.AspNetUsers.ToList();
             var users = _context.Search(users: allusers, page: page, recordsPerPage: recordsPerPage, term: "", sortBy: SortBy.AddDate, sortOrder: SortOrder.Desc, pageSize: out pageSize, TotalItemCount: out TotalItemCount);
 
             ViewBag.PageSize = pageSize;
@@ -50,14 +51,9 @@ namespace GimmeTheLoot.Controllers
         }
 
 
-
         public ActionResult Search(int page = 1, string term = "", SortBy sortBy = SortBy.AddDate, SortOrder sortOrder = SortOrder.Desc)
         {
             //System.Threading.Thread.Sleep(700);
-
-            pageSize = 0;
-            recordsPerPage = 5;
-            TotalItemCount = 0;
 
             var allusers = _context.AspNetUsers.Where(d => d.UserName != "123").ToList();
             var users = _context.Search(users: allusers, page: page, recordsPerPage: recordsPerPage, term: term, sortBy: sortBy, sortOrder: sortOrder, pageSize: out pageSize, TotalItemCount: out TotalItemCount);
@@ -72,11 +68,7 @@ namespace GimmeTheLoot.Controllers
         }
 
 
-        // GET: Users
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.AspNetUsers.ToListAsync());
-        }
+
 
         // GET: Users/Details/5
         public async Task<IActionResult> Details(string id)
@@ -189,7 +181,7 @@ namespace GimmeTheLoot.Controllers
                 }
                 
             }
-            return RedirectToAction(nameof(Index2));
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Users/Delete/5
