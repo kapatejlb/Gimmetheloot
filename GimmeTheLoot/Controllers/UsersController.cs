@@ -53,6 +53,7 @@ namespace GimmeTheLoot.Controllers
 
         public ActionResult Search(int page = 1, string term = "", SortBy sortBy = SortBy.AddDate, SortOrder sortOrder = SortOrder.Desc)
         {
+            //System.Threading.Thread.Sleep(700);
 
             pageSize = 0;
             recordsPerPage = 5;
@@ -68,7 +69,7 @@ namespace GimmeTheLoot.Controllers
 
             //return PartialView("_UsersList", users);
             return View("Index2", users);
-        }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        }
 
 
         // GET: Users
