@@ -1,4 +1,7 @@
 ﻿@using MvcPagedList.Core;
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
 
 @PagedList.Pager(actionName: "search", controllerName: "users", areaName: "",
     routeValues: new

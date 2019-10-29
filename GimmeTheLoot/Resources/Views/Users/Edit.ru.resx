@@ -186,6 +186,9 @@
   <data name="PhoneNumberConfirmed" xml:space="preserve">
     <value>Подтверджен номер телефона</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
   <data name="String1" xml:space="preserve">
     <value />
   </data>

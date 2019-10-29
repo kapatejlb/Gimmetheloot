@@ -1,9 +1,11 @@
 ﻿@model IEnumerable<GimmeTheLoot.Models.AspNetUser>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
 @if (Model.Count() == 0)
 {
     <div class="alert alert-info">
-        No User found
+        @Localizer["No User found"]
     </div>
 }
 else
@@ -11,12 +13,12 @@ else
     <table class="table table-striped table-hover">
         <thead>
             <tr>
-                <td>User Name</td>
-                <td>Phone</td>
-                <td>Phone Number Confirmed</td>
-                <td>Access Failed Count</td>
-                <td>Two Factor Enabled</td>
-                <td>EmailConfirmed</td>
+                <td>@Localizer["UserName"]</td>
+                <td>@Localizer["PhoneNumber"]</td>
+                <td>@Localizer["PhoneNumberConfirmed"]</td>
+                <td>@Localizer["AccessFailedCount"]</td>
+                <td>@Localizer["TwoFactorEnabled"]</td>
+                <td>@Localizer["EmailConfirmed"]</td>
 
             </tr>
         </thead>
@@ -31,9 +33,9 @@ else
                     <td>@Html.DisplayFor(modelItem => item.TwoFactorEnabled)</td>
                     <td>@Html.DisplayFor(modelItem => item.EmailConfirmed)</td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.Id">@Localizer["Edit"]</a>
+                        <a asp-action="Details" asp-route-id="@item.Id">@Localizer["Details"]</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">@Localizer["Delete"]</a>
                     </td>
                 </tr>
             }

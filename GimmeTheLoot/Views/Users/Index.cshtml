@@ -1,4 +1,7 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
     ViewBag.Title = "Home Page";
 }
 @model IEnumerable<AspNetUser>
