@@ -119,32 +119,77 @@ namespace GimmeTheLoot.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] AspNetUser aspNetUser)
         {
-            if (id != aspNetUser.Id)
-            {
-                return NotFound();
-            }
+            //if (id != aspNetUser.Id)
+            //{
+            //    return NotFound();
+            //}
 
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
+            //{
+            //    try
+            //    {
+            //        _context.Update(aspNetUser);
+
+            //        await _context.SaveChangesAsync();
+            //    }
+            //    catch (DbUpdateConcurrencyException)
+            //    {
+            //        if (!AspNetUsersExists(aspNetUser.Id))
+            //        {
+            //            return NotFound();
+            //        }
+            //        else
+            //        {
+            //            throw;
+            //        }
+            //    }
+            //    return RedirectToAction(nameof(Index));
+            //}
+            //return View(aspNetUser);
+
+            var saved = false;
+            while (!saved)
             {
                 try
                 {
+                    // Attempt to save changes to the database
                     _context.Update(aspNetUser);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
+                    saved = true;
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException ex)
                 {
-                    if (!AspNetUsersExists(aspNetUser.Id))
+                    foreach (var entry in ex.Entries)
                     {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
+                        if (entry.Entity is AspNetUser)
+                        {
+                            var proposedValues = entry.CurrentValues;
+                            var databaseValues = entry.GetDatabaseValues();
+
+                            foreach (var property in proposedValues.Properties)
+                            {
+                                var proposedValue = proposedValues[property];
+                                var databaseValue = databaseValues[property];
+
+                                // TODO: decide which value should be written to database
+                                // proposedValues[property] = <value to be saved>;
+                            }
+
+                            // Refresh original values to bypass next concurrency check
+                            entry.OriginalValues.SetValues(databaseValues);
+                        }
+                        else
+                        {
+                            throw new NotSupportedException(
+                                "Don't know how to handle concurrency conflicts for "
+                                + entry.Metadata.Name);
+
+                        }
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                
             }
-            return View(aspNetUser);
+            return RedirectToAction(nameof(Index2));
         }
 
         // GET: Users/Delete/5
