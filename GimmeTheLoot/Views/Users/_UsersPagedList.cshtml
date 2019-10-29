@@ -1,6 +1,6 @@
 ﻿@using MvcPagedList.Core;
 
-@PagedList.Pager(actionName: "search", controllerName: "user", areaName: "",
+@PagedList.Pager(actionName: "search", controllerName: "users", areaName: "",
     routeValues: new
     {
         term = Context.Request.Query["term"],
@@ -30,5 +30,4 @@
         CurrentLocationFormat = "page",
         PageCountFormat = "of",
         TotalItemCountFormat = "total count",
-
     })

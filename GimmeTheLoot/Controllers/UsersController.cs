@@ -66,7 +66,8 @@ namespace GimmeTheLoot.Controllers
             ViewBag.CurrentPage = page;
             ViewBag.TotalItemCount = TotalItemCount;
 
-            return PartialView("_UsersList", users);
+            //return PartialView("_UsersList", users);
+            return View("Index2", users);
         }////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
