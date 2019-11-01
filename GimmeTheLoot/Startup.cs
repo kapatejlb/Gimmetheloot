@@ -1,25 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.EntityFrameworkCore;
 using GimmeTheLoot.Data;
+using GimmeTheLoot.Hubs;
+using GimmeTheLoot.Models;
+using GimmeTheLoot.Models.Globalization;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using GimmeTheLoot.Models;
-
-using GimmeTheLoot.Hubs;
-using System.Globalization;
-using Microsoft.AspNetCore.Localization;
-using GimmeTheLoot.Models.Globalization;
-using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
+using System.Globalization;
 
 namespace GimmeTheLoot
 {
@@ -114,7 +106,46 @@ namespace GimmeTheLoot
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "/", new { controller = "Home", action = "Index" });
+
+                endpoints.MapControllerRoute(
+                    name: "defaultPrivacy",
+                    pattern: "/Privacy", new { controller = "Home", action = "Privacy" });
+
+                endpoints.MapControllerRoute(
+                    name: "ProjectsDetails",
+                    pattern: "/Projects/Details/{id?}", new { controller = "Projects", action = "Details" });
+
+                endpoints.MapControllerRoute(
+                    name: "ProjectsIndex",
+                    pattern: "/Projects", new { controller = "Projects", action = "Index" });
+
+                endpoints.MapControllerRoute(
+                    name: "ProjectsEdit",
+                    pattern: "/Projects/Edit/{id?}", new { controller = "Projects", action = "Edit" });
+
+                endpoints.MapControllerRoute(
+                    name: "RolesCreate",
+                    pattern: "/Roles/Create/{id?}", new { controller = "Roles", action = "Create" });
+
+                endpoints.MapControllerRoute(
+                    name: "RolesEdit",
+                    pattern: "/Roles/Edit/{id?}", new { controller = "Roles", action = "Edit" });
+
+
+                endpoints.MapControllerRoute(
+                    name: "UsersDetails",
+                    pattern: "/Users/Details/{id?}", new { controller = "Users", action = "Details" });
+
+
+                endpoints.MapControllerRoute(
+                    name: "Users",
+                    pattern: "/Users", new { controller = "Users", action = "Index" });
+
+                endpoints.MapControllerRoute(
+                    name: "Users",
+                    pattern: "/Users/Edit/{id?}", new { controller = "Users", action = "Edit" });
+
                 endpoints.MapRazorPages();
                 endpoints.MapHub<ChatHub>("/chatHub");
             });
